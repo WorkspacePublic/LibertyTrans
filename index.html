@@ -252,26 +252,36 @@
     </main>
 
     <script>
-        // Fungsi untuk menutup popup
+        /**
+         * Fungsi untuk menutup popup iOS Alert
+         */
         function closePopup() {
             const overlay = document.getElementById('ios-popup-overlay');
-            overlay.style.opacity = '0';
-            overlay.style.transition = 'opacity 0.2s ease';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 200);
+            if (overlay) {
+                overlay.style.opacity = '0';
+                overlay.style.transition = 'opacity 0.2s ease';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Mengaktifkan kembali scroll
+                }, 200);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Munculkan popup setelah 1 detik
+            /**
+             * Munculkan popup mudik secara otomatis setelah jeda singkat
+             */
             setTimeout(() => {
                 const overlay = document.getElementById('ios-popup-overlay');
-                overlay.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
+                if (overlay) {
+                    overlay.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Kunci scroll saat popup muncul
+                }
             }, 800);
 
-            // Animasi kartu
+            /**
+             * Menjalankan animasi masuk (fade in & slide up) untuk semua kartu
+             */
             const cards = document.querySelectorAll('.ios-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
