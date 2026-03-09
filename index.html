@@ -211,19 +211,19 @@
 
         <!-- Rute Populer dengan Link WA Berbeda -->
         <div class="mb-8">
-            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-2 mb-2">Rute Populer </h3>
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-2 mb-2">Rute Populer (PP)</h3>
             <div class="grid grid-cols-1 gap-3">
-                <a href="https://wa.me/6282260311434?text=Halo%20Admin%20Mira,%20saya%20ingin%20booking%20Travel%20rute%20Pangandaran%20-%20Bandung" class="ios-card p-4 flex justify-between items-center border-l-4 border-blue-500 block decoration-none">
+                <a href="https://wa.me/6282260311434?text=Halo%20Admin%20Mira,%20saya%20ingin%20booking%20Travel%20rute%20Pangandaran%20-%20Bandung%20PP" class="ios-card p-4 flex justify-between items-center border-l-4 border-blue-500 block decoration-none">
                     <span class="text-sm font-medium">Pangandaran ⇄ Bandung</span>
                     <span class="text-blue-500">→</span>
                 </a>
                 
-                <a href="https://wa.me/6282260311434?text=Halo%20Admin%20Mira,%20saya%20ingin%20booking%20Travel%20rute%20Pangandaran%20-%20Jabodetabek" class="ios-card p-4 flex justify-between items-center border-l-4 border-blue-500 block decoration-none">
+                <a href="https://wa.me/6282260311434?text=Halo%20Admin%20Mira,%20saya%20ingin%20booking%20Travel%20rute%20Pangandaran%20-%20Jabodetabek%20PP" class="ios-card p-4 flex justify-between items-center border-l-4 border-blue-500 block decoration-none">
                     <span class="text-sm font-medium">Pangandaran ⇄ Jabodetabek</span>
                     <span class="text-blue-500">→</span>
                 </a>
                 
-                <a href="https://wa.me/6282260311434?text=Halo%20Admin%20Mira,%20saya%20ingin%20booking%20Travel%20rute%20Pangandaran%20-%20Majalengka" class="ios-card p-4 flex justify-between items-center border-l-4 border-blue-500 block decoration-none">
+                <a href="https://wa.me/6282260311434?text=Halo%20Admin%20Mira,%20saya%20ingin%20booking%20Travel%20rute%20Pangandaran%20-%20Majalengka%20PP" class="ios-card p-4 flex justify-between items-center border-l-4 border-blue-500 block decoration-none">
                     <span class="text-sm font-medium">Pangandaran ⇄ Majalengka</span>
                     <span class="text-blue-500">→</span>
                 </a>
@@ -257,7 +257,8 @@
 
         <footer class="mt-12 text-center text-gray-400">
             <p class="text-[10px] uppercase tracking-widest font-bold mb-1">Liberty Trans</p>
-            <p class="text-[10px] mt-4 opacity-50">&copy; 2026 All Rights Reserved.</p>
+            <p class="text-xs">Nyaman, Aman, Tepat Waktu.</p>
+            <p class="text-[10px] mt-4 opacity-50">&copy; 2026 Liberty Trans Travel. All Rights Reserved.</p>
         </footer>
 
     </main>
@@ -278,20 +279,23 @@
             }
         }
 
+        /**
+         * Fungsi untuk memunculkan popup (tanpa delay)
+         */
+        function showPopup() {
+            const overlay = document.getElementById('ios-popup-overlay');
+            if (overlay) {
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Kunci scroll saat popup muncul
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            /**
-             * Munculkan popup mudik secara otomatis setelah jeda singkat
-             */
-            setTimeout(() => {
-                const overlay = document.getElementById('ios-popup-overlay');
-                if (overlay) {
-                    overlay.style.display = 'flex';
-                    document.body.style.overflow = 'hidden'; // Kunci scroll saat popup muncul
-                }
-            }, 800);
+            // Langsung panggil fungsi showPopup tanpa setTimeout
+            showPopup();
 
             /**
-             * Menjalankan animasi masuk (fade in & slide up) untuk semua kartu
+             * Menjalankan animasi masuk untuk semua kartu
              */
             const cards = document.querySelectorAll('.ios-card');
             cards.forEach((card, index) => {
@@ -301,7 +305,7 @@
                     card.style.transition = 'all 0.5s ease';
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, 100 * index);
+                }, 50 * index);
             });
         });
     </script>
