@@ -152,16 +152,18 @@
 <body class="pb-20">
 
     <!-- Alert Modal -->
-    <div id="ios-popup-overlay">
+  <div id="ios-popup-overlay">
         <div class="ios-alert">
-            <img src="brosur1.jpg" alt="Mudik 2026" class="w-full h-44 object-cover">
-            <div class="px-6 py-5">
-                <h3 class="font-bold text-xl mb-1">Mudik Lebih Awal 🌙</h3>
-                <p class="text-[14px] text-gray-500 leading-tight font-medium">
-                    Nikmati perjalanan mudik 2026 tanpa beban. Amankan kursi Anda sekarang bersama Liberty Trans.
-                </p>
+            <!-- Menambahkan Image Brosur -->
+            <img src="brosur1.jpg" alt="Brosur Mudik 2026" class="ios-alert-image" onerror="this.src='https://via.placeholder.com/600x400?text=Brosur+Mudik+2026'">
+            
+            <div class="ios-alert-content">
+                <div class="ios-alert-title">Persiapan Mudik 2026 🌙</div>
+                <div class="ios-alert-message">
+                    Menjelang Lebaran, permintaan travel meningkat pesat. Booking lebih awal untuk menjamin ketersediaan kursi dan kenyamanan keluarga Anda.
+                </div>
             </div>
-            <button class="ios-alert-button" onclick="closePopup()">Mulai Perjalanan</button>
+            <button class="ios-alert-button" onclick="closePopup()">Siap!</button>
         </div>
     </div>
 
