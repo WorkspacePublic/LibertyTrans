@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liberty Trans | Pangandaran</title>
+    <title>Liberty Trans | iOS 26 Liquid Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --ios-blue: #007AFF;
-            --ios-bg: #fbfbfd;
-            --ios-card: rgba(255, 255, 255, 0.75);
+            --ios-bg: #f5f5f7;
+            /* Ultra Liquid Glass - iOS 26 Spec */
+            --glass-bg: rgba(255, 255, 255, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.6);
             --ios-text: #1d1d1f;
             --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
         }
@@ -23,320 +25,379 @@
             overflow-x: hidden;
             letter-spacing: -0.015em;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(0, 122, 255, 0.05) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(0, 198, 255, 0.05) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(0, 122, 255, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 198, 255, 0.12) 0px, transparent 50%),
+                white;
+            background-attachment: fixed;
         }
 
-        /* Branding Style - Solid Clean Sans Serif */
         .brand-style {
-            font-family: var(--font-main);
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             letter-spacing: -0.04em;
-            color: #1d1d1f; /* Warna solid tanpa gradasi */
-            display: inline-block;
-            line-height: 1;
+            color: #1d1d1f;
         }
 
-        /* Hero Text - Tetap menggunakan gradasi untuk kedalaman visual */
         .hero-title {
-            font-family: var(--font-main);
-            font-size: 48px;
+            font-size: 44px;
             font-weight: 800;
             line-height: 1.1;
             letter-spacing: -0.05em;
-            background: linear-gradient(135deg, #1d1d1f 30%, #007AFF 100%);
+            background: linear-gradient(180deg, #1d1d1f 60%, #007AFF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: block;
-        }
-
-        h1, h2, h3, h4 {
-            letter-spacing: -0.03em;
         }
 
         .ios-caption {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             color: #86868b;
         }
 
-        .ios-header {
-            background: rgba(251, 251, 253, 0.6);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(0,0,0,0.03);
+        /* LIQUID GLASS - iOS 26 HIGH TRANSPARENCY */
+        .liquid-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(200%) brightness(1.05);
+            -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.05);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 
+                0 10px 40px -10px rgba(0, 0, 0, 0.05),
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .ios-card {
-            background: var(--ios-card);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        .liquid-glass:hover {
+            transform: scale(1.015);
+            background: rgba(255, 255, 255, 0.45);
         }
 
-        .ios-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
-            background: rgba(255, 255, 255, 0.85);
-        }
-
-        .ios-list-item {
+        /* Avatar iOS Style */
+        .ios-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 22px; 
+            background: linear-gradient(135deg, #e0e0e0, #ffffff);
+            padding: 2px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             position: relative;
-            overflow: hidden;
         }
 
-        .ios-list-item:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: calc(100% - 64px);
-            height: 1px;
-            background: rgba(0,0,0,0.05);
-        }
-
-        #ios-popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .ios-avatar img {
+            border-radius: 20px;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.25);
-            z-index: 9999;
-            backdrop-filter: blur(12px);
-            justify-content: center;
+            object-fit: cover;
+        }
+
+        .online-dot {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: #34C759;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+
+        .ios-btn-primary {
+            background: var(--ios-blue);
+            color: white;
+            font-weight: 700;
+            border-radius: 18px;
+            padding: 12px 24px;
+            display: inline-flex;
             align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .ios-btn-primary:active {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+
+        .ios-btn-secondary {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--ios-text);
+            font-weight: 700;
+            border-radius: 16px;
+            padding: 10px 18px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ios-btn-secondary:active {
+            background: rgba(0, 0, 0, 0.1);
+            transform: scale(0.98);
+        }
+
+        /* Article Card Layout */
+        .service-article {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
             padding: 24px;
         }
 
-        .ios-alert {
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(40px) saturate(200%);
-            width: 100%;
-            max-width: 320px;
-            border-radius: 28px;
-            text-align: center;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            animation: ios-spring 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        .service-icon-box {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        @keyframes ios-spring {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        /* Navigation Glass */
+        .ios-nav {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255,255,255,0.7);
         }
 
-        .ios-alert-button {
-            border-top: 1px solid rgba(0,0,0,0.05);
-            color: var(--ios-blue);
-            font-weight: 600;
-            font-size: 17px;
-            padding: 16px;
-            width: 100%;
-            background: transparent;
-        }
-
-        .glow-btn {
-            background: linear-gradient(135deg, #007AFF, #00C6FF);
-            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
-            transition: all 0.3s;
+        /* Footer Alamat Style */
+        .footer-address {
+            font-size: 13px;
+            color: #6e6e73;
+            line-height: 1.6;
+            max-width: 280px;
+            margin: 0 auto;
         }
     </style>
 </head>
-<body class="pb-20">
+<body class="pb-10">
 
-    <!-- Alert Modal -->
-  <div id="ios-popup-overlay">
-        <div class="ios-alert">
-            <!-- Menambahkan Image Brosur -->
-            <img src="brosur1.jpg" alt="Brosur Mudik 2026" class="ios-alert-image" onerror="this.src='https://via.placeholder.com/600x400?text=Brosur+Mudik+2026'">
-            
-            <div class="ios-alert-content">
-                <div class="ios-alert-title">Persiapan Mudik 2026 🌙</div>
-                <div class="ios-alert-message">
-                    Menjelang Lebaran, permintaan travel meningkat pesat. Booking lebih awal untuk menjamin ketersediaan kursi dan kenyamanan keluarga Anda.
-                </div>
-            </div>
-            <button class="ios-alert-button" onclick="closePopup()">Siap!</button>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="ios-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+    <!-- Header Navigation -->
+    <header class="ios-nav sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
         <div class="flex flex-col">
             <h1 class="brand-style">LibertyTrans</h1>
-            <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-[0.35em] mt-0.5">Travel & Tour</span>
+            <span class="ios-caption text-[8px] mt-0.5">Eksklusif Travel & Tour</span>
         </div>
-        <div class="p-2.5 bg-white/70 rounded-full border border-white shadow-sm">
-            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+        <div class="flex items-center gap-3">
+             <div class="p-2 bg-white/50 rounded-full border border-white">
+                <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+             </div>
         </div>
     </header>
 
-    <main class="max-w-md mx-auto px-6 pt-8">
+    <main class="max-w-md mx-auto px-6 pt-10">
         
         <!-- Hero Section -->
-        <section class="mb-14">
-            <span class="ios-caption mb-3 block">Premium Travel Service</span>
-            <h2 class="hero-title">Perjalanan</h2>
-            <h2 class="hero-title">Tanpa Batas.</h2>
-            <p class="text-[#6e6e73] text-[17px] leading-snug font-medium mt-6">
-                Liberty Trans menghadirkan standar baru kenyamanan mobilitas Anda dengan layanan eksklusif 2026.
+        <section class="mb-12">
+            <h2 class="hero-title">Standar Baru</h2>
+            <h2 class="hero-title">Mobilitas Premium.</h2>
+            <p class="text-[#6e6e73] text-[17px] font-medium mt-4 leading-relaxed">
+                Menyediakan solusi perjalanan terbaik dengan sentuhan personal dan kenyamanan tingkat tinggi.
             </p>
         </section>
 
-        <!-- Layanan Utama -->
-        <div class="mb-10">
-            <h3 class="ios-caption ml-1 mb-4">Layanan Kami</h3>
-            <div class="ios-card overflow-hidden">
-                <div class="ios-list-item flex items-center p-5 cursor-pointer">
-                    <div class="w-11 h-11 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mr-4 text-lg shadow-inner">🚐</div>
-                    <div class="flex-1">
-                        <p class="font-bold text-[15px]">Travel Reguler</p>
-                        <p class="text-[12px] text-gray-400 font-medium">Jadwal rutin harian</p>
+        <!-- Menu Artikel Layanan -->
+        <div class="space-y-6 mb-16">
+            <h3 class="ios-caption ml-2">Layanan Eksklusif</h3>
+            
+            <!-- Travel Reguler -->
+            <div class="liquid-glass service-article">
+                <div class="flex items-center gap-4">
+                    <div class="service-icon-box">🚐</div>
+                    <div>
+                        <h4 class="font-extrabold text-[18px]">Travel Reguler</h4>
+                        <p class="ios-caption text-[9px]">Jadwal Rutin Harian</p>
                     </div>
-                    <span class="text-gray-300 text-lg">→</span>
                 </div>
-                <div class="ios-list-item flex items-center p-5 cursor-pointer">
-                    <div class="w-11 h-11 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mr-4 text-lg shadow-inner">✈️</div>
-                    <div class="flex-1">
-                        <p class="font-bold text-[15px]">Drop In & Out Bandara</p>
-                        <p class="text-[12px] text-gray-400 font-medium">Antar jemput bandara tepat waktu</p>
-                    </div>
-                    <span class="text-gray-300 text-lg">→</span>
+                <p class="text-[14px] text-gray-500 font-medium leading-relaxed">
+                    Layanan antar jemput penumpang harian dengan armada prima. Nikmati perjalanan yang terjadwal dan efisien untuk kebutuhan mobilitas rutin Anda.
+                </p>
+                <div>
+                    <a href="https://wa.me/6282260311434?text=Halo%20Liberty%20Trans%2C%20saya%20ingin%20menanyakan%20jadwal%20dan%20memesan%20layanan%20Travel%20Reguler.%20Mohon%20informasinya%2C%20terima%20kasih." class="ios-btn-primary">
+                        Cek Jadwal Rutin
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
                 </div>
-                <div class="ios-list-item flex items-center p-5 cursor-pointer">
-                    <div class="w-11 h-11 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 mr-4 text-lg shadow-inner">✨</div>
-                    <div class="flex-1">
-                        <p class="font-bold text-[15px]">Privat Charter</p>
-                        <p class="text-[12px] text-gray-400 font-medium">Eksklusif untuk grup & keluarga</p>
+            </div>
+
+            <!-- Drop In & Out Bandara -->
+            <div class="liquid-glass service-article">
+                <div class="flex items-center gap-4">
+                    <div class="service-icon-box">✈️</div>
+                    <div>
+                        <h4 class="font-extrabold text-[18px]">Drop Bandara</h4>
+                        <p class="ios-caption text-[9px]">Antar Jemput Tepat Waktu</p>
                     </div>
-                    <span class="text-gray-300 text-lg">→</span>
                 </div>
-                <div class="ios-list-item flex items-center p-5 cursor-pointer">
-                    <div class="w-11 h-11 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 mr-4 text-lg shadow-inner">📦</div>
-                    <div class="flex-1">
-                        <p class="font-bold text-[15px]">Logistik Ekspres</p>
-                        <p class="text-[12px] text-gray-400 font-medium">Kirim paket kilat aman</p>
+                <p class="text-[14px] text-gray-500 font-medium leading-relaxed">
+                    Khawatir tertinggal pesawat? Kami menjamin ketepatan waktu untuk keberangkatan maupun penjemputan dari bandara langsung ke depan pintu Anda.
+                </p>
+                <div>
+                    <a href="https://wa.me/6282260311434?text=Halo%20Liberty%20Trans%2C%20saya%20membutuhkan%20layanan%20Drop%20Bandara.%20Bisa%20bantu%20atur%20penjemputan%20tepat%20waktu%3F%20Terima%20kasih." class="ios-btn-primary">
+                        Booking Jemputan Flight
+                    </a>
+                </div>
+            </div>
+
+            <!-- Privat Charter -->
+            <div class="liquid-glass service-article">
+                <div class="flex items-center gap-4">
+                    <div class="service-icon-box">✨</div>
+                    <div>
+                        <h4 class="font-extrabold text-[18px]">Privat Charter</h4>
+                        <p class="ios-caption text-[9px]">Eksklusif & Personal</p>
                     </div>
-                    <span class="text-gray-300 text-lg">→</span>
+                </div>
+                <p class="text-[14px] text-gray-500 font-medium leading-relaxed">
+                    Sewa armada khusus untuk perjalanan keluarga, bisnis, atau grup kecil. Rute dan waktu sepenuhnya dalam kendali Anda dengan privasi maksimal.
+                </p>
+                <div>
+                    <a href="https://wa.me/6282260311434?text=Halo%20Liberty%20Trans%2C%20saya%20berminat%20untuk%20layanan%20Privat%20Charter.%20Saya%20ingin%20mengatur%20rute%20khusus%20untuk%20grup%2Fkeluarga.%20Terima%20kasih." class="ios-btn-primary">
+                        Atur Rute Khusus
+                    </a>
+                </div>
+            </div>
+
+            <!-- Logistik Ekspres -->
+            <div class="liquid-glass service-article">
+                <div class="flex items-center gap-4">
+                    <div class="service-icon-box">📦</div>
+                    <div>
+                        <h4 class="font-extrabold text-[18px]">Logistik Ekspres</h4>
+                        <p class="ios-caption text-[9px]">Kirim Paket Kilat</p>
+                    </div>
+                </div>
+                <p class="text-[14px] text-gray-500 font-medium leading-relaxed">
+                    Solusi pengiriman paket atau dokumen penting yang membutuhkan waktu singkat. Kami antar dalam hari yang sama dengan keamanan terjamin.
+                </p>
+                <div>
+                    <a href="https://wa.me/6282260311434?text=Halo%20Liberty%20Trans%2C%20saya%20ingin%20mengirim%20paket%20via%20Logistik%20Ekspres.%20Bagaimana%20prosedur%20dan%20biayanya%3F%20Terima%20kasih." class="ios-btn-primary">
+                        Kirim Paket Sekarang
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Rute Perjalanan -->
-        <div class="mb-10">
-            <h3 class="ios-caption ml-1 mb-4">Rute Unggulan (PP)</h3>
-            <div class="space-y-3">
-                <a href="https://wa.me/6282260311434" class="ios-card p-5 flex items-center justify-between group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-[3.5px] h-9 bg-blue-500 rounded-full shadow-[0_0_12px_rgba(59,130,246,0.3)]"></div>
-                        <div>
-                            <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider">Layanan Door to Door</p>
-                            <p class="font-bold text-[16px]">Pangandaran ⇄ Bandung</p>
+        <!-- Rute Perjalanan Lengkap -->
+        <div class="mb-16">
+            <h3 class="ios-caption ml-2 mb-4">Rute Unggulan (PP)</h3>
+            <div class="space-y-4">
+                <!-- Rute 1 -->
+                <div class="liquid-glass p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-10 bg-blue-500 rounded-full"></div>
+                            <div>
+                                <p class="font-extrabold text-[17px]">Pangandaran ⇄ Bandung</p>
+                                <p class="text-[12px] text-gray-400 font-bold uppercase tracking-wider">Door to Door</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-                    </div>
-                </a>
-
-                <a href="https://wa.me/6282260311434" class="ios-card p-5 flex items-center justify-between group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-[3.5px] h-9 bg-indigo-500 rounded-full shadow-[0_0_12px_rgba(99,102,241,0.3)]"></div>
-                        <div>
-                            <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider">Layanan Door to Door</p>
-                            <p class="font-bold text-[16px]">Pangandaran ⇄ Jabodetabek</p>
-                        </div>
-                    </div>
-                    <div class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-                    </div>
-                </a>
-
-                <a href="https://wa.me/6282260311434" class="ios-card p-5 flex items-center justify-between group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-[3.5px] h-9 bg-teal-500 rounded-full shadow-[0_0_12px_rgba(20,184,166,0.3)]"></div>
-                        <div>
-                            <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider">Layanan Door to Door</p>
-                            <p class="font-bold text-[16px]">Pangandaran ⇄ Majalengka</p>
-                        </div>
-                    </div>
-                    <div class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-teal-600 group-hover:text-white transition-all duration-300 shadow-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-                    </div>
-                </a>
-
-                <a href="https://wa.me/6282260311434" class="ios-card p-5 flex items-center justify-between group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-[3.5px] h-9 bg-orange-500 rounded-full shadow-[0_0_12px_rgba(249,115,22,0.3)]"></div>
-                        <div>
-                            <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider">Airport Shuttle</p>
-                            <p class="font-bold text-[16px]">Bandung ⇄ Bandara</p>
-                        </div>
-                    </div>
-                    <div class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 shadow-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Contact Card -->
-        <div class="ios-card p-8 text-center relative overflow-hidden mb-6">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full -mr-16 -mt-16 blur-2xl"></div>
-            <div class="relative">
-                <div class="inline-block relative mb-4">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Mira" alt="Mira" class="w-20 h-20 rounded-[2.2rem] bg-white p-1 border border-white shadow-xl">
-                    <div class="absolute bottom-1.5 right-1.5 w-4.5 h-4.5 bg-green-500 border-[3px] border-white rounded-full"></div>
+                    <a href="https://wa.me/6282260311434?text=Halo%20Liberty%20Trans%2C%20saya%20ingin%20memesan%20kursi%20untuk%20rute%20Pangandaran%20-%20Bandung.%20Tersedia%20untuk%20kapan%20ya%3F" class="ios-btn-secondary w-full justify-center">
+                        Pesan Kursi Bandung
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
                 </div>
-                <h4 class="text-[20px] font-bold mb-1">Admin Mira</h4>
-                <p class="text-[13px] text-gray-400 mb-6 font-semibold">Siap membantu reservasi Anda 24/7</p>
-                <a href="https://wa.me/6282260311434" class="glow-btn block w-full text-white font-bold py-5 rounded-[22px] text-[16px]">
-                    Hubungi WhatsApp
-                </a>
+
+                <!-- Rute 2 -->
+                <div class="liquid-glass p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-10 bg-indigo-500 rounded-full"></div>
+                            <div>
+                                <p class="font-extrabold text-[17px]">Pangandaran ⇄ Jabodetabek</p>
+                                <p class="text-[12px] text-gray-400 font-bold uppercase tracking-wider">Door to Door</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/6282260311434?text=Halo%20Liberty%20Trans%2C%20saya%20ingin%20memesan%20kursi%20untuk%20rute%20Pangandaran%20-%20Jakarta%2FBekasi%2FTangerang.%20Mohon%20info%20jadwalnya." class="ios-btn-secondary w-full justify-center">
+                        Reservasi Jabodetabek
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Rute 3 -->
+                <div class="liquid-glass p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-10 bg-teal-500 rounded-full"></div>
+                            <div>
+                                <p class="font-extrabold text-[17px]">Pangandaran ⇄ Majalengka</p>
+                                <p class="text-[12px] text-gray-400 font-bold uppercase tracking-wider">Door to Door</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/6282260311434?text=Halo%20Liberty%20Trans%2C%20saya%20ingin%20memesan%20kursi%20untuk%20rute%20Pangandaran%20-%20Majalengka.%20Mohon%20informasi%20ketersediaan." class="ios-btn-secondary w-full justify-center">
+                        Pesan Kursi Majalengka
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Rute 4 -->
+                <div class="liquid-glass p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-10 bg-orange-500 rounded-full"></div>
+                            <div>
+                                <p class="font-extrabold text-[17px]">Bandung ⇄ Bandara</p>
+                                <p class="text-[12px] text-gray-400 font-bold uppercase tracking-wider">Airport Shuttle</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/6282260311434?text=Halo%20Liberty%20Trans%2C%20saya%20ingin%20memesan%20Shuttle%20Bandara%20dari%20Bandung.%20Mohon%20disesuaikan%20dengan%20jam%20keberangkatan%20pesawat%20saya." class="ios-btn-secondary w-full justify-center">
+                        Amankan Kursi Bandara
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <footer class="mt-16 text-center">
-            <p class="text-[10px] uppercase font-bold tracking-[0.4em] text-gray-400">Liberty Trans &copy; 2026</p>
+        <!-- Contact Section -->
+        <div class="liquid-glass p-8 text-center mb-10">
+            <div class="flex justify-center mb-6">
+                <div class="ios-avatar">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Mira" alt="Mira iOS Avatar">
+                    <div class="online-dot"></div>
+                </div>
+            </div>
+            <h4 class="text-[22px] font-extrabold mb-1">Admin Mira</h4>
+            <p class="text-[14px] text-gray-500 font-bold mb-8 uppercase tracking-widest">Pusat Layanan 24 Jam</p>
+            <a href="https://wa.me/6282260311434?text=Halo%20Admin%20Mira%2C%20saya%20ingin%20berkonsultasi%20mengenai%20perjalanan%20saya.%20Bisa%20dibantu%3F" class="inline-flex items-center justify-center w-full bg-black text-white py-5 rounded-[22px] font-extrabold text-[16px] shadow-xl hover:opacity-90 transition-all">
+                Mulai Chat Konsultasi
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-20 text-center space-y-4">
+            <div class="footer-address">
+                <p class="font-extrabold mb-1 text-black">Liberty Trans HQ</p>
+                <p>Jalan Raya Cijulang, Kabupaten Pangandaran, Jawa Barat, Indonesia</p>
+            </div>
+            <div class="pt-8 pb-10">
+                <p class="text-[9px] uppercase font-black tracking-[0.5em] text-gray-300">Liberty Trans &copy; 2026</p>
+            </div>
         </footer>
 
     </main>
 
     <script>
-        function closePopup() {
-            const overlay = document.getElementById('ios-popup-overlay');
-            overlay.style.opacity = '0';
-            overlay.style.transition = 'opacity 0.3s ease';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-
-        function showPopup() {
-            const overlay = document.getElementById('ios-popup-overlay');
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(showPopup, 500);
-            const cards = document.querySelectorAll('.ios-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px) scale(0.98)';
+            const items = document.querySelectorAll('.liquid-glass');
+            items.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(40px) scale(0.95)';
                 setTimeout(() => {
-                    card.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0) scale(1)';
-                }, 80 * index);
+                    item.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0) scale(1)';
+                }, 100 * index);
             });
         });
     </script>
